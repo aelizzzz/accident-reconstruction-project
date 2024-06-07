@@ -5,16 +5,20 @@ import bpy
 # and shape parameters has already been loaded using the 
 # Meshcapade Add-on
 
-# Path to the "results" folder
-input_folder_path = "D:/Utilisateurs/Azilis/Documents/_Thesis/master-thesis-kth/blender-step/results"
+# Path to the folder with the results and were the joints files will be saved
+input_folder = "D:/Utilisateurs/Azilis/Documents/_Thesis/pose-estimation_constrained-average-height-weight"
+# Path to results folder
+results_path = os.path.join(input_folder, "results")
 # Path to the "joints-blender" folder where the results will be saved
-output_path = "D:/Utilisateurs/Azilis/Documents/_Thesis/master-thesis-kth/blender-step/joints-blender"
+output_path = os.path.join(input_folder, "joints-blender")
+if not os.path.exists(output_path):
+   os.makedirs(output_path)
 
 # Iterate through the results folder
-for root, dirs, files in os.walk(input_folder_path):
+for root, dirs, files in os.walk(results_path):
     for case in dirs:
         # Load pose
-        result_path = os.path.join(input_folder_path, case, "000.pkl")    
+        result_path = os.path.join(results_path, case, "000.pkl")    
         bpy.ops.object.set_pose_correctives()
         bpy.ops.object.snap_to_ground_plane()
         bpy.ops.object.load_pose(filepath=result_path, anim_format='blender')
