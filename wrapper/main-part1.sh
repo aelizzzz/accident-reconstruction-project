@@ -117,6 +117,7 @@ do
     cp $file meshes/smplx
     python3 -m transfer_model --exp-cfg config_files/smplx2smpl.yaml
     mv -v output/* '$smpl'
+    rm meshes/smplx/*.obj
 done
 '
 
