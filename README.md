@@ -144,4 +144,11 @@ Example of the output structure for one input image with one person in it:
 sbatch jobscript-openpose.sh -f FOLDER_PATH
 ```
 - Clean-up the results with PoseAnnotator or other
+- (Option: use `keypoints-cleanup-velocity.ipynb` to format the new keypoints correctly)
 - For each case, run `velocity_estimation_example.ipynb`
+
+## Other Jupyter Notebooks
+
+- `bmi-scrapper.ipynb`: get a player's height and weight from season played, team and number
+- `bmi-xlsx2json.ipynb`: create the json files for height-weigth constrained smplx from the xlsx file outputted by the scrapper
+- `keypoints-cleanup-pose-estimation.ipynb`: clean-up and reformat the keypoints outputted by PoseAnnotator to be used with SMPLify-X
