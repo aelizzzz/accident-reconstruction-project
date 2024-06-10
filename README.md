@@ -1,15 +1,23 @@
-# Wrapper for the pose estimation pipeline
+# Accident reconstruction for biomechanics
+
+Master Thesis project at KTH "Accident Reconstruction in Ice
+Hockey: A Pipeline using Pose and Kinematics Estimation to Personalize Finite Element Human Body Models"
+
+Azilis Emma Sulian Even \
+Supervisor: Qiantailang Yuan
+
+## Instructions for the pose estimation pipeline
 
 Pipeline to perform pose estimation from single images. 
 
 This provides Openpose 2D joints estimation, SMPLX and SMPL 3D pose estimation, OSSO skeleton  estimation, performs rigid registration of the pelvic bone to get an appropriate position of the regressed 3D joints, and finally outputs a LS-Dyna keyfile to position the THUMS body model.
 
-## Run on Alvis
+### Run on Alvis
 
 Ensure that you have access to the files in the following folder since this is where the containers used in this pipeline are stored:
 `/mimer/NOBACKUP/groups/snic2022-22-770/Azilis_workspace/singularity_image`.
 
-### First part of the pipeline
+#### First part of the pipeline
 
 Inputs:
 ```
@@ -44,7 +52,7 @@ The following options available:
 2. `-b` (required): `free` if there are no constraints to be applied on the height and weight of the people of interest, `fixed` if the height and weight should be the same for all cases and `personalized` if there is height and weight information available for each single person. In this case, there should be only one person per image, and the `bmi` folder needs to be defined. 
 3. `-h` and `-w` (optional): if the option `-b fixed` is used, then these options should be defined as the fixed height (cm, float) and weight (kg, float)
 
-### Second part of the pipeline
+#### Second part of the pipeline
 
 Inputs:
 ```
@@ -68,7 +76,7 @@ Then, run
 sbatch main-part2.sh -f FOLDER_PATH
 ```
 
-## Output file structure
+### Output file structure
 
 Example of the output structure for one input image with one person in it:
 ```
@@ -122,6 +130,18 @@ Example of the output structure for one input image with one person in it:
             └── 000.pkl
 ```
 
-## Improvement suggestions
+### Improvement suggestions
 
 - Incorporate the Blender Add-on step in the pipeline
+
+
+## Instructions for the velocity estimation pipeline
+
+- Crop and stabilize the accident videos around the impact, so that enough rink landmarks are visible (ex: DaVinci Resolve, with  the Stabilization tool using the Perspective and Camera Lock options)
+- Extract all the frames using `extraction-frame-loop.ipynb` (update the folder name to the folder with all the cropped videos, the output folder and the path to the reference rink image)
+- Run Openpose with FOLDER_PATH the path to the previous output folder
+```Shell
+sbatch jobscript-openpose.sh -f FOLDER_PATH
+```
+- Clean-up the results with PoseAnnotator or other
+- For each case, run `velocity_estimation_example.ipynb`
