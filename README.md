@@ -6,7 +6,7 @@ Hockey: A Pipeline using Pose and Kinematics Estimation to Personalize Finite El
 Azilis Emma Sulian Even \
 Supervisor: Qiantailang Yuan
 
-## Instructions for the pose estimation pipeline
+## 1. Instructions for the pose estimation pipeline
 
 Pipeline to perform pose estimation from single images. 
 
@@ -135,7 +135,7 @@ Example of the output structure for one input image with one person in it:
 - Incorporate the Blender Add-on step in the pipeline
 
 
-## Instructions for the velocity estimation pipeline
+## 2. Instructions for the velocity estimation pipeline
 
 - Crop and stabilize the accident videos around the impact, so that enough rink landmarks are visible (ex: DaVinci Resolve, with  the Stabilization tool using the Perspective and Camera Lock options)
 - Extract all the frames using `extraction-frame-loop.ipynb` (update the folder name to the folder with all the cropped videos, the output folder and the path to the reference rink image)
@@ -147,7 +147,7 @@ sbatch jobscript-openpose.sh -f FOLDER_PATH
 - (Option: use `keypoints-cleanup-velocity.ipynb` to format the new keypoints correctly)
 - For each case, run `velocity_estimation_example.ipynb`
 
-## Other Jupyter Notebooks
+## 3. Other Jupyter Notebooks
 
 - `bmi-scrapper.ipynb`: get a player's height and weight from season played, team and number
 - `bmi-xlsx2json.ipynb`: create the json files for height-weigth constrained smplx from the xlsx file outputted by the scrapper
