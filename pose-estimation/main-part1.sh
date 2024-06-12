@@ -104,9 +104,8 @@ module purge
 # Run SMPLX to SMPL
 echo "Running SMPLX to SMPL conversion"
 mkdir -p $smpl
-apptainer exec --fakeroot --writable-tmpfs /mimer/NOBACKUP/groups/snic2022-22-770/Azilis_workspace/singularity_image/smplx_new.sif \
-bash -c 'pip install --force-reinstall pip==19
-pip install chumpy
+apptainer exec --fakeroot --writable-tmpfs /mimer/NOBACKUP/groups/snic2022-22-770/Azilis_workspace/singularity_image/smplx_with_chumpy.sif \
+bash -c '
 cd /workspace/smplx/
 sed -i '5d' config_files/smplx2smpl.yaml
 echo "Conversion SMPX to SMPL"
